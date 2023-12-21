@@ -1,0 +1,55 @@
+Traceback (most recent call last):
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/exception_handler.py", line 17, in __call__
+	return func(*args, **kwargs)
+       	^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/cli/main.py", line 54, in main_subshell
+	parser = generate_parser(add_help=True)
+         	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/cli/conda_argparse.py", line 115, in generate_parser
+	configure_parser_create(sub_parsers)
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/cli/conda_argparse.py", line 767, in configure_parser_create
+	add_parser_solver(solver_mode_options)
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/cli/conda_argparse.py", line 1975, in add_parser_solver
+	solver.name for solver in context.plugin_manager.get_hook_results("solvers")
+                          	^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/base/context.py", line 492, in plugin_manager
+	from ..plugins.manager import get_plugin_manager
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/plugins/__init__.py", line 28, in <module>
+	from .hookspec import hookimpl  # noqa: F401
+	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/plugins/hookspec.py", line 16, in <module>
+	from .types import (
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/plugins/types.py", line 15, in <module>
+	from ..core.solve import Solver
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/core/solve.py", line 30, in <module>
+	from ..exceptions import (
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/exceptions.py", line 16, in <module>
+	from requests.exceptions import JSONDecodeError
+ImportError: cannot import name 'JSONDecodeError' from 'requests.exceptions' (/home/user/anaconda3/lib/python3.11/site-packages/requests/exceptions.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/anaconda3/bin/conda", line 13, in <module>
+	sys.exit(main())
+         	^^^^^^
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/cli/main.py", line 109, in main
+	return conda_exception_handler(main, *args, **kwargs)
+       	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/exception_handler.py", line 389, in conda_exception_handler
+	return_value = exception_handler(func, *args, **kwargs)
+               	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/exception_handler.py", line 20, in __call__
+	return self.handle_exception(exc_val, exc_tb)
+       	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/exception_handler.py", line 52, in handle_exception
+	from .exceptions import (
+  File "/home/user/anaconda3/lib/python3.11/site-packages/conda/exceptions.py", line 16, in <module>
+	from requests.exceptions import JSONDecodeError
+ImportError: cannot import name 'JSONDecodeError' from 'requests.exceptions' (/home/user/anaconda3/lib/python3.11/site-packages/requests/exceptions.py)
+
+every conda command except conda activate were not working, and I solved this problem by update the version of requests
+
+This helped me to solve this problem
+https://community.anaconda.cloud/t/jsondecodeerror-for-many-conda-commands/60397
+
